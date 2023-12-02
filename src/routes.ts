@@ -8,7 +8,7 @@ import {
   SetReservations,
   UpdateReservations,
   DeleteReservations,
-  UpdateHourReservation
+  ReservationVerify
 } from './app/controllers/Reservations';
 
 import {
@@ -46,7 +46,7 @@ router.put('/reservations/:id', authentication, UpdateReservations);
 router.delete('/reservations/:id', authentication, DeleteReservations);
 
 //reservation verify hours
-router.post('/reservation-verify', authentication, UpdateHourReservation);
+router.post('/reservation-verify', authentication, ReservationVerify);
 
 //user
 router.get('/users', authentication, GetUsers);
@@ -63,11 +63,10 @@ router.put('/incentives/:id', authentication, UpdateIncentives);
 router.delete('/incentives/:id', authentication, DeleteIncentive);
 
 //Tables
-router.get('/incentives', authentication, GetTables);
-router.post('/incentives', authentication, SetTables);
-router.put('/incentives/:id', authentication, UpdateTable);
-router.delete('/incentives/:id', authentication,  DeleteTable);
-
+router.get('/tables', authentication, GetTables);
+router.post('/tables', authentication, SetTables);
+router.put('/tables/:id', authentication, UpdateTable);
+router.delete('/tables/:id', authentication,  DeleteTable);
 
 
 export default router;
