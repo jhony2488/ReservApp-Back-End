@@ -1,0 +1,115 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "api-prospects",
+    "description": ""
+  },
+  "host": "localhost:80",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Default",
+      "description": "Endpoints of default endpoints"
+    },
+    {
+      "name": "Tasks",
+      "description": "Endpoints tasks"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "auth-token",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Default"
+        ],
+        "description": "Endpoint para ver a versão desta API",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/DefaultIndex"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Descrição sobre o erro"
+        }
+      }
+    },
+    "Error406": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Descrição sobre o erro"
+        }
+      }
+    },
+    "Error403": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Descrição sobre o erro"
+        }
+      }
+    },
+    "ErrorTokenInvalid": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Token Invalid || Token not provided"
+        }
+      }
+    },
+    "DefaultIndex": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "example": "1.0.0"
+        }
+      }
+    }
+  }
+}
