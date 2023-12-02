@@ -20,10 +20,8 @@ export class UserRepository implements IUsersRepository {
       return { message: 'Email ou senha incorreto' };
     }
 
-    await bcrypt.compare(data.password, user.password, (err, result) => {
-      if (result) {
-        loginValidation = true;
-      }
+    await bcrypt.compare(data.password, user.password, (err, result:boolean) => {
+        loginValidation = result;
     });
 
     return loginValidation;
@@ -87,14 +85,14 @@ export class UserRepository implements IUsersRepository {
     await this.repository.save(user);
     return user;
   }
-  async updateRule(id: number, data: PropsUsers): Promise<any> {
+  async updateRule(id: number, rule: string): Promise<any> {
     const user = await this.repository.findOneBy({ user_id: id });
 
     if (user == null || !user) {
       return null;
     }
 
-    user.rule = data.rule;
+    user.rule = rule;
 
     await this.repository.save(user);
     return user;

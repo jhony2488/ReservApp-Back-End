@@ -6,7 +6,7 @@ interface IUsersRepository {
   save(data: PropsUsers): Promise<User>;
   update(id:number,data: PropsUsers): Promise<User | null>;
   updatePassword(id:number,data: PropsUsers): Promise<User | null>;
-  updateRule(id:number,data: PropsUsers): Promise<User | null>;
+  updateRule(id:number,rule: string): Promise<User | null>;
   findById(id: number): Promise<User | null>;
   findByEmail(email: string): Promise<User | null>;
   find(): Promise<User>;
