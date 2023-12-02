@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === 'development') {
     path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
   });
 }
+
 async function auth(req: Request, res: Response, next: NextFunction) {
   const authHeader: string | undefined = req.header('Authorization');
   const authUserEmail: string | undefined = req.header('email');
@@ -26,7 +27,7 @@ async function auth(req: Request, res: Response, next: NextFunction) {
   });
 
   if (errorUserAdmin) {
-    return res.status(401).json({ message: 'Token not provided' });
+    return res.status(401).json({ message: 'Ação invalida' });
   }
 
   if (!authHeader) {
