@@ -2,23 +2,19 @@ version: '3'
 
 services:
   db:
-    container_name: 'reserv-back-end'
-    image: mysql:latest
+    container_name: "reserv-db"
+    image: postgres:latest
     restart: always
     ports:
-      - '3306:3306'
-    command: --init-file /data/application/init.sql
-    volumes:
-      - ./data/application/init.sql:/data/application/init.sql
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: jh556
-      MYSQL_DATABASE: appTasks
-      MYSQL_USER: root
-      MYSQL_PASSWORD: jh556
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
       TZ: America/Sao_Paulo
 
   app:
-    container_name: 'reserv-front-end'
+    container_name: 'reserv-back-end'
     build: .
     command: npm run dev
     ports:

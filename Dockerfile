@@ -4,10 +4,10 @@ WORKDIR /src
 
 COPY package*.json ./
 
-RUN yarn
+RUN npm install
 
 COPY . .
 
 EXPOSE 80
 
-CMD yarn dev
+CMD npm run dev
