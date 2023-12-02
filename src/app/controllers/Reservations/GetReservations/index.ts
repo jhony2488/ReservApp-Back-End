@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { ReservationRepository } from '../../../repositories/Reservations';
+import {PropsReservations} from '../../../interfaces/reservations'
 
 async function GetReservations(req: Request, res: Response) {
   const { id } = req.query;
@@ -9,11 +10,11 @@ async function GetReservations(req: Request, res: Response) {
     let result = [];
 
     if (id) {
-      await Reservation.findById(parseInt(String(id), 10)).then((reservation) => {
+      await Reservation.findById(parseInt(String(id), 10)).then((reservation:PropsReservations[]) => {
         result = reservation;
       });
     } else {
-      await Reservation.find().then((reservations) => {
+      await Reservation.find().then((reservations: PropsReservations[]) => {
         result = reservations;
       });
     }

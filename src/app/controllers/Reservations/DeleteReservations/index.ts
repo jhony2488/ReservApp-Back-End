@@ -1,7 +1,6 @@
 
 import { Request, Response } from 'express';
 import { ReservationRepository } from '../../../repositories/Reservations';
-import { PropsReservations } from '../../../interfaces/reservations';
 
 async function DeleteReservations(req: Request, res: Response) {
   const { id } = req.params;

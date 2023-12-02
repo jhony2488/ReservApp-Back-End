@@ -5,7 +5,7 @@ import { PropsReservations, PropsReservationsQuery } from '../../../interfaces/r
 async function ReservationVerify(req: Request, res: Response) {
   const { date, hour, name_contact, contact }: PropsReservations = req.body;
   const Reservation = new ReservationRepository();
-  let result = [];
+  let result:PropsReservations[] = [];
 
   const query: PropsReservationsQuery = { date, hour, name_contact, contact };
 
@@ -23,7 +23,7 @@ async function ReservationVerify(req: Request, res: Response) {
   }
 
   try {
-    await Reservation.findByQuery(query).then((reservation) => {
+    await Reservation.findByQuery(query).then((reservation: PropsReservations[]) => {
       result = reservation;
     });
 
