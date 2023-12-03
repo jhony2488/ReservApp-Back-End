@@ -27,12 +27,6 @@ import {
  DeleteIncentive
  } from './app/controllers/Incentives';
 
- import {
- GetTables,
- SetTables,
- UpdateTable,
- DeleteTable
-  } from './app/controllers/Tables';
 
 const router = express.Router();
 
@@ -61,12 +55,6 @@ router.get('/incentives', authentication, GetIncentives);
 router.post('/incentives', authentication, SetIncentives);
 router.put('/incentives/:id', authentication, UpdateIncentives);
 router.delete('/incentives/:id', authentication, DeleteIncentive);
-
-//Tables
-router.get('/tables', authentication, GetTables);
-router.post('/tables', authentication, SetTables);
-router.put('/tables/:id', authentication, UpdateTable);
-router.delete('/tables/:id', authentication,  DeleteTable);
 
 
 export default router;

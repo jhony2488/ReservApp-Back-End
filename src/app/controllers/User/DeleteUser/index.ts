@@ -4,7 +4,7 @@ import { UserRepository } from '../../../repositories/Users';
 async function DeleteUser(req: Request, res: Response) {
   const { id } = req.params;
 
-  const getId = typeof id === 'string' ? parseInt(id) : id;
+  const getId = typeof id === 'string' ? parseInt(id,10) : id;
 
   const User = new UserRepository();
 

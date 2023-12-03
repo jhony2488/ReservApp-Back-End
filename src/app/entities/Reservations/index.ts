@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity('reservations')
 export class Reservation {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ unsigned: true })
     reservation_id: number
 
     @Column()
@@ -19,4 +19,7 @@ export class Reservation {
 
     @Column()
     contact: string
+
+    @Column()
+    active: boolean
 }

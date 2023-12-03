@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import {useValidationReservations} from '../../../hooks/validationReservations'
 import { ReservationRepository } from '../../../repositories/Reservations';
 import {PropsReservations} from '../../../interfaces/reservations'
 
@@ -7,6 +8,8 @@ async function GetReservations(req: Request, res: Response) {
   const Reservation = new ReservationRepository();
 
   try {
+    await useValidationReservations();
+
     let result = [];
 
     if (id) {

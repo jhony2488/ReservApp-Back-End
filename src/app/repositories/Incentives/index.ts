@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { Incentives } from '../../entities/Incentives';
 import dataSource from '../../../database/typeorm';
 import IIncentivesRepository from '../../interfaces/incentivesRepository';
-import { PropsIncentives } from '../../interfaces/incentives';
+import { PropsIncentives, PropsIncentivesQuery } from '../../interfaces/incentives';
 
 export class IncentivesRepository implements IIncentivesRepository {
   private repository: Repository<Incentives>;
@@ -26,6 +26,9 @@ export class IncentivesRepository implements IIncentivesRepository {
   }
   async findById(id: number): Promise<any> {
     return this.repository.findOneBy({ incentive_id: id });
+  }
+  async findByQuery(query: PropsIncentives | PropsIncentivesQuery): Promise<any> {
+    return this.repository.findOneBy(query);
   }
   async update(id: number, data: PropsIncentives): Promise<any> {
     const incentives = await this.repository.findOneBy({ incentive_id: id });

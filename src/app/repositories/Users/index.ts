@@ -13,34 +13,34 @@ export class UserRepository implements IUsersRepository {
   }
 
   async login(data: PropsUserLogin) {
-    let loginValidation: boolean = false;
+
     const user = await this.repository.findOneBy({ email: data.email });
 
     if (!user || user === null) {
       return { message: 'Email ou senha incorreto' };
     }
 
-    await bcrypt.compare(data.password, user.password, (err, result:boolean) => {
-        loginValidation = result;
-    });
-
-    return loginValidation;
+   return user;
   }
 
   async save(data: PropsUsers) {
     const saltRounds = 10;
     const user = await new User();
+    let getPassword = null;
 
     user.name = data.name;
     user.email = data.email;
-
-    await bcrypt.hash(data.password, saltRounds, (err, hash: string) => {
-      user.password = hash;
-    });
-
     user.rule = data.rule;
 
-    await this.repository.save(user);
+    await bcrypt.hash(data.password, saltRounds, async (err, hash: string) => {
+      getPassword = await hash;
+      user.password = await hash;
+
+      await this.repository.save(user);
+      return hash;
+    });
+
+
     return user;
   }
   async find(): Promise<any> {

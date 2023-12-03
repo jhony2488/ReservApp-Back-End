@@ -2,7 +2,7 @@ import {User} from '../entities/Users';
 import {PropsUsers, PropsUserLogin} from './users'
 
 interface IUsersRepository {
-  login(data: PropsUserLogin): Promise<boolean | { message: string }>;
+  login(data: PropsUserLogin): Promise<any | { message: string }>;
   save(data: PropsUsers): Promise<User>;
   update(id:number,data: PropsUsers): Promise<User | null>;
   updatePassword(id:number,data: PropsUsers): Promise<User | null>;
