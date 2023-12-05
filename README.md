@@ -115,7 +115,7 @@ $ npm run test-stress || yarn test-stress
 </h2>
 
 ```bash
-#  Executar o build da documentação caso ja esteja com a aplicação rodando com o docker , basta apenas acessar a URL abaixo
+#  Executar o a API
 $ npm run dev || yarn dev
 
 # O servidor inciará na porta:80 - acesse a documentação <http://localhost:80/documentation/>
