@@ -45,17 +45,24 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 ```bash
 # Clone este repositório
 $ git clone <https://github.com/jhony2488/ReservApp-Back-End>
+
 # Acesse a pasta do projeto no terminal/cmd
 $ cd ReservApp-Back-End
+
 # Instale as dependências
 $ npm install || yarn install
+
 # Baixar postgresql e rodar ele localmente
 $ <https://www.postgresql.org/>
+
 # rodar a aplicação em modo de desenvolvimento
 $ npm run dev || yarn dev
+
 # OU
+
 # Gerar Build
 $ npm run build || yarn build
+
 # rodar a aplicação em modo de produção
 $ npm run start || yarn start
 ```
