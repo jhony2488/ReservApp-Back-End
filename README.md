@@ -71,7 +71,7 @@ $ npm run start || yarn start
 - [https://hub.docker.com/](https://hub.docker.com/)
 
 ```bash
-# Execute o mysql no seu terminal/CMD
+# Execute o docker compose no seu terminal/CMD
 $  docker-compose up -d || docker compose up -d
 
 # Execute as migrations
@@ -88,9 +88,9 @@ $  npm run migration:run || npm run migration:run
 
 - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-### Instale o MySQL atravez do link abaixo caso ainda não o tenha instalado
+### Instale o PostgresSQL atravez do link abaixo caso ainda não o tenha instalado
 
-- [https://www.mysql.com/downloads/](https://www.mysql.com/downloads/)
+- [https://www.postgresql.org/](https://www.postgresql.org/)
 
 ```bash
 # Executar os testes
