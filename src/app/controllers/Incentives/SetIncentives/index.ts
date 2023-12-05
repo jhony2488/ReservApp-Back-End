@@ -10,7 +10,7 @@ async function SetIncentives(req: Request, res: Response) {
   try {
     await Incentive.save({ title, description, type });
 
-    return res.json({
+    return res.status(201).json({
       message: `Incentivo do tipo ${type} criado com sucesso`,
     });
   } catch (err) {

@@ -72,9 +72,13 @@ $ npm run start || yarn start
 
 ```bash
 # Execute o mysql no seu terminal/CMD
-$  docker-compose up -d
+$  docker-compose up -d || docker compose up -d
+
+# Execute as migrations
+$  npm run migration:run || npm run migration:run 
 
 # O servidor inciará na porta:80 - acesse <http://localhost:80>
+# Obs: caso o container node não rode, deixe o servidor rodando e rode localmente o app.
 ```
 
 

@@ -20,6 +20,10 @@ export async function useSugestionHours(date:string, hour:string) {
 
 
   await reservation.findByQuery({ date, hour }).then(async (reservationItems) => {
+    if (typeof reservationItems === 'object' && reservationItems && reservationItems !== null) {
+      reservationItems = [reservationItems];
+    }
+
     if (reservationItems.length > 0) {
       let hourGet = hour;
       let dateGet = date;
@@ -29,6 +33,9 @@ export async function useSugestionHours(date:string, hour:string) {
 
 
         await reservation.findByQuery({ date: dateGet, hour: hourGet }).then((reservation) => {
+          if (typeof reservation === 'object' && reservation && reservation!== null) {
+            reservation = [reservation];
+          }
           if (reservation.length === 0) {
             isFoundFreeTime = false;
             reservationOne = { date: dateGet, hour: hourGet };
@@ -43,6 +50,9 @@ export async function useSugestionHours(date:string, hour:string) {
 
 
         await reservation.findByQuery({ date: dateGet, hour: hourGet }).then((reservation) => {
+          if (typeof reservation === 'object' && reservation && reservation!== null) {
+            reservation = [reservation];
+          }
           if (reservation.length === 0) {
             isFoundFreeTimeTwo = false;
             reservationTwo = { date: dateGet, hour: hourGet };
@@ -57,6 +67,9 @@ export async function useSugestionHours(date:string, hour:string) {
 
 
         await reservation.findByQuery({ date: dateGet, hour: hourGet }).then((reservation) => {
+          if (typeof reservation === 'object' && reservation && reservation!== null) {
+            reservation = [reservation];
+          }
           if (reservation.length === 0) {
             isFoundFreeTimeThree = false;
             reservationThree = { date: dateGet, hour: hourGet };
@@ -74,6 +87,9 @@ export async function useSugestionHours(date:string, hour:string) {
         countSearch=1
 
         await reservation.findByQuery({ date: dateGet, hour: hourGet }).then((reservation) => {
+          if (typeof reservation === 'object' && reservation && reservation!== null) {
+            reservation = [reservation];
+          }
           if (reservation.length === 0) {
             isFoundFreeTimeFour = false;
             reservationFour = { date: dateGet, hour: hourGet };
@@ -88,6 +104,9 @@ export async function useSugestionHours(date:string, hour:string) {
 
 
         await reservation.findByQuery({ date: dateGet, hour: hourGet }).then((reservation) => {
+          if (typeof reservation === 'object' && reservation && reservation!== null) {
+            reservation = [reservation];
+          }
           if (reservation.length === 0) {
             isFoundFreeTimeFive = false;
             reservationFive = { date: dateGet, hour: hourGet };
@@ -102,6 +121,9 @@ export async function useSugestionHours(date:string, hour:string) {
 
 
         await reservation.findByQuery({ date: dateGet, hour: hourGet }).then((reservation) => {
+          if (typeof reservation === 'object' && reservation && reservation!== null) {
+            reservation = [reservation];
+          }
           if (reservation.length === 0) {
             isFoundFreeTimeSix = false;
             reservationSix = { date: dateGet, hour: hourGet };
@@ -154,18 +176,27 @@ export async function useGapFilling(date: string, hour:string) {
     dateBefore = hourBefore === '22:00:00' || hourBefore === '23:00:00' ? somarOneDay(dateGet) : dateGet;
 
     await reservation.findByQuery({ date: dateAfter, hour: hourAfter }).then((reservation) => {
+      if (typeof reservation === 'object' && reservation && reservation!== null) {
+        reservation = [reservation];
+      }
       if (reservation.length > 0) {
         reservationOne = { date: dateAfter, hour: hourAfter };
       }
     });
 
     await reservation.findByQuery({ date: dateMeio, hour: hourMeio }).then((reservation) => {
+      if (typeof reservation === 'object' && reservation && reservation!== null) {
+        reservation = [reservation];
+      }
       if (reservation.length === 0) {
         reservationTwo = { date: dateMeio, hour: hourMeio };
       }
     });
 
     await reservation.findByQuery({ date: dateBefore, hour: hourBefore }).then((reservation) => {
+      if (typeof reservation === 'object' && reservation && reservation!== null) {
+        reservation = [reservation];
+      }
       if (reservation.length > 0) {
         reservationThree = { date: dateBefore, hour: hourBefore };
       }

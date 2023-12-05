@@ -1,10 +1,11 @@
-FROM node:alpine
+FROM node:18
 
 WORKDIR /src
 
-COPY package*.json ./
+COPY package.json ./
 
 RUN npm install
+RUN npm rebuild bcrypt
 
 COPY . .
 

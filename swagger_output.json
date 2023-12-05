@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "api-prospects",
+    "title": "api-reservs",
     "description": ""
   },
   "host": "localhost:80",
@@ -11,10 +11,6 @@
     {
       "name": "Default",
       "description": "Endpoints of default endpoints"
-    },
-    {
-      "name": "Tasks",
-      "description": "Endpoints tasks"
     }
   ],
   "schemes": [
@@ -24,7 +20,7 @@
   "securityDefinitions": {
     "api_key": {
       "type": "apiKey",
-      "name": "auth-token",
+      "name": "Authorization",
       "in": "header"
     }
   },
@@ -63,6 +59,601 @@
           }
         }
       }
+    },
+    "/reservations": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Endpoint para ver a versão desta API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id da reserva",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/ResponseGetReservation"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Endpoint para criar uma reserva",
+        "parameters": [
+          {
+            "name": "reservation",
+            "in": "body",
+            "description": "Objeto da reserva",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/inputReservation"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "Objeto da reserva",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/priority"
+            }
+          }
+
+        ],
+        "responses": {
+          "201": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/responseCreateReservation"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/error400CreateReservation"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/reservations/:id": {
+      "put": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Endpoint para atualizar uma reserva",
+        "parameters": [
+          {
+            "name": "reservation",
+            "in": "body",
+            "description": "Objeto da reserva",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/inputReservationPut"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "Objeto da reserva",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/priority"
+            }
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/inputResponse"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/error400CreateReservation"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Endpoint para deletar uma reserva",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "description": "id de uma reserva",
+            "required": true
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/deleteResponseReservation"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/error400CreateReservation"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/reservation-verify": {
+      "post": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Endpoint para verificar uma reserva",
+        "parameters": [
+          {
+            "name": "reservation",
+            "in": "body",
+            "description": "Objeto da reserva",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/inputReservation"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "Objeto da reserva",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/priority"
+            }
+          }
+
+        ],
+        "responses": {
+          "201": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/responseCreateReservation"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/error400CreateReservation"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/incentives": {
+      "get": {
+        "tags": [
+          "Incentives"
+        ],
+        "description": "Endpoint para ver a versão desta API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id da reserva",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/incentivesResponseGet"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Incentives"
+        ],
+        "description": "Endpoint para criar um incentivo/desconto",
+        "parameters": [
+          {
+            "name": "incentive",
+            "in": "body",
+            "description": "Objeto Incentivo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/inputIncentives"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responsePostIncentives"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/error400CreateReservation"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+    }},
+    "/incentives/:id": {
+      "put": {
+        "tags": [
+          "Incentives"
+        ],
+        "description": "Endpoint para atualizar incentivo",
+        "parameters": [
+          {
+            "name": "incentive",
+            "in": "body",
+            "description": "Objeto Incentivo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/inputIncentives"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/incentiveUpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Incentives"
+        ],
+        "description": "Endpoint para deletar incentivo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "params",
+            "description": "id de um incentivo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Incentivo deletado",
+            "schema": {
+              "$ref": "#/definitions/incentivoDeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para ver  usuarios",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id de usuario",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mostra a versão desta API",
+            "schema": {
+              "$ref": "#/definitions/responseGetUser"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para criar usuario",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Objeto Incentivo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/setUser"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseSetUsers"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/error400CreateReservation"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+    }
+    },
+    "/users/:id": {
+        "put": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Endpoint para atualizar usuario",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Objeto user",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/updateUserInput"
+              }
+            },
+            {
+              "name": "id",
+              "in": "params",
+              "description": "id user",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Resposta devolutiva",
+              "schema": {
+                "$ref": "#/definitions/responseUpdateUser"
+              }
+            },
+            "400": {
+              "description": "Quando houver um erro na requisição",
+              "schema": {
+                "$ref": "#/definitions/Error400"
+              }
+            },
+            "401": {
+              "schema": {
+                "$ref": "#/definitions/ErrorTokenInvalid"
+              },
+              "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Endpoint para atualizar rule de usuario",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Objeto user",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/updateRuleUser"
+              }
+            },
+            {
+              "name": "id",
+              "in": "params",
+              "description": "id user",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Resposta devolutiva",
+              "schema": {
+                "$ref": "#/definitions/updateResponseUser"
+              }
+            },
+            "400": {
+              "description": "Quando houver um erro na requisição",
+              "schema": {
+                "$ref": "#/definitions/Error400"
+              }
+            },
+            "401": {
+              "schema": {
+                "$ref": "#/definitions/ErrorTokenInvalid"
+              },
+              "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Endpoint para deletar usuario",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "params",
+              "description": "id de um usuario",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User deletado",
+              "schema": {
+                "$ref": "#/definitions/responseDeleteUser"
+              }
+            },
+            "400": {
+              "description": "Quando houver um erro na requisição",
+              "schema": {
+                "$ref": "#/definitions/Error400"
+              }
+            },
+            "401": {
+              "schema": {
+                "$ref": "#/definitions/ErrorTokenInvalid"
+              },
+              "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+            }
+          }
+        }
+    },
+    "/user/login":{
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para login",
+        "parameters": [
+          {
+            "name": "user login inputs",
+            "in": "body",
+            "description": "Objeto user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/loginInputs"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseLogin"
+            }
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/responseLoginInputsErr"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+    }
     }
   },
   "definitions": {
@@ -108,6 +699,549 @@
         "version": {
           "type": "string",
           "example": "1.0.0"
+        }
+      }
+    },
+    "getIncentives": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "example": "1.0.0"
+        }
+      }
+    },
+    "errLogin": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Email ou senha incorretos"
+        }
+      }
+    },
+    "incentivoDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Incentivo deletado com sucesso"
+        }
+      }
+    },
+    "incentiveUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Incentivo atualizado com sucesso"
+        }
+      }
+    },
+    "responseGetUser": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "number",
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "example": "jhonata"
+              },
+              "email": {
+                "type": "string",
+                "example": "jhonata55@gmail.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "$2b$10$DDAATbHvLCbT9oyoty3xcO3xfFryrUJNEN0SlAoLgvIVOVGHfOl6S"
+              },
+              "rule": {
+                "type": "string",
+                "example": "admin2"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responseDeleteUser": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuario deletado com sucesso"
+        }
+      }
+    },
+    "updateRuleUser": {
+      "type": "object",
+      "properties": {
+        "rule": {
+          "type": "string",
+          "example": "admin"
+        }
+      }
+    },
+    "responseLogin": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Login realizado com sucesso"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impob25hdGE1NUBnbWFpbC5jb20iLCJpYXQiOjE3MDE3ODAzNTh9.CfvUft-MZajDCxRcXnDkL-eTf7vR3H99WcU-vXN8RHw"
+        },
+        "email": {
+          "type": "string",
+          "example": "jhonata55@gmail.com"
+        }
+      }
+    },
+    "loginInputs": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "jhonata55@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "elementares"
+        }
+      }
+    },
+    "responseLoginInputsErr": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Email ou senha incorretos"
+        }
+      }
+    },
+    "updateResponseUser": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuario regras e permissões de usuário atualizada com sucesso"
+        }
+      }
+    },
+    "responseUpdateUser": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuario atualizado com sucesso"
+        }
+      }
+    },
+    "updateUserInput": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "jhonata@gmail.com"
+        },
+        "name": {
+          "type": "string",
+          "example": "jhonata"
+        },
+        "password": {
+          "type": "string",
+          "example": "elementares2"
+        },
+        "rule": {
+          "type": "string",
+          "example": "admin"
+        }
+      }
+    },
+    "setUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "jhonata55@gmail.com"
+        },
+        "name": {
+          "type": "string",
+          "example": "jhonata"
+        },
+        "password": {
+          "type": "string",
+          "example": "elementares"
+        },
+        "rule": {
+          "type": "string",
+          "example": "admin"
+        }
+      }
+    },
+    "responseSetUser": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuario criado com sucesso"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "jhonata55@gmail.com"
+            },
+            "name": {
+              "type": "string",
+              "example": "jhonata"
+            },
+            "password": {
+              "type": "string",
+              "example": "elementares"
+            },
+            "rule": {
+              "type": "string",
+              "example": "admin"
+            }
+          }
+        }
+      }
+    },
+    "inputReservation": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "example": "04/12/2023"
+        },
+        "hour": {
+          "type": "string",
+          "example": "16:00:00"
+        },
+        "name_contact": {
+          "type": "string",
+          "example": "Eduarda Liman"
+        },
+        "number_peoples": {
+          "type": "number",
+          "example": 4
+        },
+        "contact": {
+          "type": "string",
+          "example": "81994880190"
+        }
+      }
+    },
+    "inputReservationPut": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "example": "04/12/2023"
+        },
+        "hour": {
+          "type": "string",
+          "example": "16:00:00"
+        },
+        "name_contact": {
+          "type": "string",
+          "example": "Eduarda Liman"
+        },
+        "number_peoples": {
+          "type": "number",
+          "example": 4
+        },
+        "contact": {
+          "type": "string",
+          "example": "81994880190"
+        },
+        "active": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "inputResponsePut": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Reserva atualizada com sucesso"
+        }
+      }
+    },
+    "deleteResponseReservation": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Reserva deletada com sucesso"
+        }
+      }
+    },
+    "incentivesResponseGet": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "incentive_id": {
+                "type": "number",
+                "example": 4
+              },
+              "title": {
+                "type": "string",
+                "example": "Desconto de 20%"
+              },
+              "description": {
+                "type": "string",
+                "example": "Desconto de 20% bla bla bla"
+              },
+              "type": {
+                "type": "string",
+                "example": "desconto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responsePostIncentives": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Incentivo do tipo desconto criado com sucesso"
+        }
+      }
+    },
+    "inputIncentives": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Desconto de 20%"
+        },
+        "description": {
+          "type": "string",
+          "example": "Desconto de 20% bla bla bla"
+        },
+        "type": {
+          "type": "string",
+          "example": "desconto"
+        }
+      }
+    },
+    "priority": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "type": "string",
+          "example": "entre horarios"
+        }
+      }
+    },
+    "ResponseGetReservation": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reservation_id": {
+                "type": "number",
+                "example": 11
+              },
+              "date": {
+                "type": "string",
+                "example": "04/12/2023"
+              },
+              "hour": {
+                "type": "string",
+                "example": "18:00:00"
+              },
+              "number_peoples": {
+                "type": "string",
+                "example": "4"
+              },
+              "name_contact": {
+                "type": "string",
+                "example": "Eduarda Liman"
+              },
+              "contact": {
+                "type": "string",
+                "example": "81994880190"
+              },
+              "active": {
+                "type": "boolean",
+                "example": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "responseCreateReservation": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Reserva criada com sucesso"
+        },
+        "incentives": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "example": [
+                "08:00:00",
+                "09:00:00",
+                "10:00:00",
+                "11:00:00",
+                "12:00:00",
+                "13:00:00",
+                "14:00:00",
+                "15:00:00",
+                "17:00:00",
+                "18:00:00",
+                "19:00:00",
+                "20:00:00",
+                "21:00:00",
+                "22:00:00"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "incentives": {
+              "type": "object",
+              "properties": {
+                "incentive_id": {
+                  "type": "number",
+                  "example": 3
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Desconto de 40%"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Desconto de 40% bla bla bla"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "desconto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "error400CreateReservation": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Reserva já existente"
+        },
+        "sugestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reservation_id": {
+                "type": "number",
+                "example": 6
+              },
+              "date": {
+                "type": "string",
+                "example": "02/12/2023"
+              },
+              "hour": {
+                "type": "string",
+                "example": "16:00"
+              },
+              "number_peoples": {
+                "type": "string",
+                "example": "4"
+              },
+              "name_contact": {
+                "type": "string",
+                "example": "Eduarda Liman"
+              },
+              "contact": {
+                "type": "string",
+                "example": "81994880190"
+              },
+              "active": {
+                "type": "boolean",
+                "example": false
+              }
+            }
+          }
+        },
+        "incentives": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "example": [
+                "08:00:00",
+                "09:00:00",
+                "10:00:00",
+                "11:00:00",
+                "12:00:00",
+                "13:00:00",
+                "14:00:00",
+                "15:00:00",
+                "17:00:00",
+                "18:00:00",
+                "19:00:00",
+                "20:00:00",
+                "21:00:00",
+                "22:00:00"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "incentives": {
+              "type": "object",
+              "properties": {
+                "incentive_id": {
+                  "type": "number",
+                  "example": 3
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Desconto de 40%"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Desconto de 40% bla bla bla"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "desconto"
+                }
+              }
+            }
+          }
         }
       }
     }

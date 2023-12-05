@@ -19,18 +19,22 @@ export class ReservationRepository implements IReservationsRepository {
     reservation.name_contact = data.name_contact;
     reservation.number_peoples = data.number_peoples;
     reservation.contact = data.contact;
+    reservation.active = data.active;
 
     await this.repository.save(reservation);
     return reservation;
   }
   async find(): Promise<any> {
-    return this.repository.find();
+    const result=this.repository.find()
+    return !result || result==null ? [] : result
   }
   async findById(id: number): Promise<any> {
-    return this.repository.findOneBy({ reservation_id: id });
+    const result= this.repository.findOneBy({ reservation_id: id });
+    return !result || result==null ? [] : result
   }
   async findByQuery(query: PropsReservationsQuery): Promise<any> {
-    return this.repository.findOneBy(query);
+    const result= this.repository.findOneBy(query);
+    return !result || result==null ? [] : result
   }
   async update(id: number, data: PropsReservations): Promise<any> {
     const reservation = await this.repository.findOneBy({ reservation_id: id });
@@ -44,6 +48,8 @@ export class ReservationRepository implements IReservationsRepository {
     reservation.name_contact = data.name_contact;
     reservation.number_peoples = data.number_peoples;
     reservation.contact = data.contact;
+    reservation.active = data.active;
+
     await this.repository.save(reservation);
     return reservation;
   }

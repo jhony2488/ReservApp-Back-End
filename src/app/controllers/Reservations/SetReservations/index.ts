@@ -16,13 +16,21 @@ async function SetReservations(req: Request, res: Response) {
 
     await Reservation.findByQuery({ date, hour, name_contact, number_peoples, contact }).then(
       async (reservationsItems) => {
-        if (reservationsItems.length > 0) {
 
-          await useOccupationHistory({ contact, name_contact }).then(async (itemsReservations) => {
-            if (itemsReservations.length > 0) {
+        if (typeof reservationsItems === 'object' && reservationsItems && reservationsItems !== null) {
+          reservationsItems = [reservationsItems];
+        }
+
+        if (reservationsItems?.length > 0) {
+          await useOccupationHistory({ contact, name_contact }).then(async (itemsReservations: any) => {
+
+            if (typeof itemsReservations === 'object' && itemsReservations && itemsReservations !== null) {
+              itemsReservations = [itemsReservations];
+            }
+            if (itemsReservations?.length > 0) {
               return res.status(400).json({
                 message: 'Reserva já existente',
-                sugestions: itemsReservations,
+                sugestionsHoursHistoryOccupation: itemsReservations.map((item)=>item.hour),
                 incentives,
               });
             }
@@ -57,7 +65,7 @@ async function SetReservations(req: Request, res: Response) {
       active: true,
     });
 
-    return res.json({
+    return res.status(201).json({
       message: 'Reserva criada com sucesso',
       incentives,
     });

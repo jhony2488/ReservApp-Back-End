@@ -14,7 +14,14 @@ export function getFormattedCurrentDateTime() {
 export function filterObjectsBeforeCurrentDateTime(objects) {
   const currentDateTime = getFormattedCurrentDateTime();
 
-  const filteredObjects = objects.filter(obj => {
+  if(typeof objects ==='object' &&  objects!==null){
+    objects=[objects]
+  }
+  if(!objects || objects===null){
+    return []
+  }
+
+  const filteredObjects = objects?.filter(obj => {
     const objDateTime = `${obj.date} ${obj.hour}`;
     return objDateTime < currentDateTime.date + ' ' + currentDateTime.hour;
   });

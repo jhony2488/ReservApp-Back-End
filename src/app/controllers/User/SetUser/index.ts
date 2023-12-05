@@ -10,7 +10,7 @@ async function SetUser(req: Request, res: Response) {
   try {
     await User.save({ email, name, password,rule });
 
-    return res.json({
+    return res.status(201).json({
       message: 'Usuario criado com sucesso',
       user: { email, name, password,rule }
     });

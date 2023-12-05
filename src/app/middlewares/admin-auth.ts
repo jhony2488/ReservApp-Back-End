@@ -20,11 +20,14 @@ async function auth(req: Request, res: Response, next: NextFunction) {
 
   const User = new UserRepository();
 
-  await User.findByEmail(authUserEmail).then((user) => {
-    if (user[0].rule !== 'admin') {
-      errorUserAdmin = true;
-    }
-  });
+  if (authUserEmail) {
+    await User.findByEmail(authUserEmail).then((user) => {
+
+      if (user.rule !== 'admin') {
+        errorUserAdmin = true;
+      }
+    });
+  }
 
   if (errorUserAdmin) {
     return res.status(401).json({ message: 'Ação invalida' });

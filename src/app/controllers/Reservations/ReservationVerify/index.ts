@@ -12,7 +12,7 @@ async function ReservationVerify(req: Request, res: Response) {
 
   const Reservation = new ReservationRepository();
 
-  let result: PropsReservations[] = [];
+  let result: any[] = [];
 
   const query: PropsReservationsQuery = { date, hour, name_contact, contact };
 
@@ -32,15 +32,27 @@ async function ReservationVerify(req: Request, res: Response) {
   try {
     const incentives = await useIncentivesHoursLessPopular({ type: 'desconto' }, date);
 
-    await Reservation.findByQuery(query).then((reservation: PropsReservations[]) => {
+    await Reservation.findByQuery(query).then((reservation: any) => {
       result = reservation;
     });
 
-    if (result.length > 0) {
-      await useOccupationHistory({ contact, name_contact }).then(async (itemsReservations) => {
-        if (itemsReservations.length > 0) {
+    if ((result = null)) {
+      result = [];
+    }
+
+    if (typeof result === 'object' && result && result !== null) {
+      result = [result];
+    }
+
+    if (result?.length > 0) {
+      await useOccupationHistory({ contact, name_contact }).then(async (itemsReservations: any) => {
+        if (typeof itemsReservations === 'object' && itemsReservations && itemsReservations !== null) {
+          itemsReservations = [itemsReservations];
+        }
+
+        if (itemsReservations?.length > 0) {
           return res.json({
-            message: result.length > 0 ? 'Reserva(s) encontrada com sucesso' : 'Reserva não encontrada',
+            message: result?.length > 0 ? 'Reserva(s) encontrada com sucesso' : 'Reserva não encontrada',
             result,
             sugestions: itemsReservations,
             incentives,
@@ -50,7 +62,7 @@ async function ReservationVerify(req: Request, res: Response) {
         if (priority === 'entre horarios') {
           const useGap = await useGapFilling(date, hour);
           return res.json({
-            message: result.length > 0 ? 'Reserva(s) encontrada com sucesso' : 'Reserva não encontrada',
+            message: result?.length > 0 ? 'Reserva(s) encontrada com sucesso' : 'Reserva não encontrada',
             sugestions: useGap,
             incentives,
           });

@@ -22,19 +22,22 @@ export class IncentivesRepository implements IIncentivesRepository {
     return incentives;
   }
   async find(): Promise<any> {
-    return this.repository.find();
+    const result=this.repository.find();
+    return result ===null || !result ? [] : result;
   }
   async findById(id: number): Promise<any> {
-    return this.repository.findOneBy({ incentive_id: id });
+    const result= this.repository.findOneBy({ incentive_id: id })
+    return result ===null || !result ? [] : result;
   }
   async findByQuery(query: PropsIncentives | PropsIncentivesQuery): Promise<any> {
-    return this.repository.findOneBy(query);
+    const result= this.repository.findOneBy(query);
+    return result ===null || !result ? [] : result;
   }
   async update(id: number, data: PropsIncentives): Promise<any> {
     const incentives = await this.repository.findOneBy({ incentive_id: id });
 
     if (incentives == null || !incentives) {
-      return null;
+      return [];
     }
 
     incentives.title = data.title;
@@ -48,7 +51,7 @@ export class IncentivesRepository implements IIncentivesRepository {
     const incentives = await this.repository.findOneBy({ incentive_id: id });
 
     if (incentives == null || !incentives) {
-      return null;
+      return [];
     }
 
     return this.repository.remove(incentives);

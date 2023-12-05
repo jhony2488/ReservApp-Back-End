@@ -12,11 +12,11 @@ export async function useValidationReservations() {
 
   reservations = await filterObjectsBeforeCurrentDateTime(reservations);
 
-  reservations = await reservations.map((item) => {
+  reservations = await reservations?.map((item) => {
     return { ...item, active: false };
   });
 
-  await reservations.map(async (item: PropsReservations) => {
+  await reservations?.map(async (item: PropsReservations) => {
     await reservation.update(item.reservation_id || 0, item);
     return;
   });

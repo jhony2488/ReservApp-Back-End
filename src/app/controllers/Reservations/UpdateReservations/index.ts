@@ -20,10 +20,10 @@ async function UpdateReservations(req: Request, res: Response) {
 
     await Reservation.findByQuery({ date, hour, name_contact, number_peoples, contact }).then(
       async (reservationsItems) => {
-        if (reservationsItems.length > 0) {
+        if (reservationsItems?.length > 0) {
 
           await useOccupationHistory({ contact, name_contact }).then(async (itemsReservations) => {
-            if (itemsReservations.length > 0) {
+            if (itemsReservations?.length > 0) {
               return res.status(400).json({
                 message: 'Reserva já existente',
                 sugestions: itemsReservations,
