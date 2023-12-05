@@ -38,6 +38,9 @@ export default {
     './src/config/',
     './src/database/',
     './src/server.ts',
+    './src/app.ts',
+    './src/routes.ts',
+    './src/useApp.ts',
   ],
 
   // Indicates which provider should be used to instrument code for coverage

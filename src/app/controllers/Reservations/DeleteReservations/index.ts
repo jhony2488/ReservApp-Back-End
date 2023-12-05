@@ -13,7 +13,7 @@ async function DeleteReservations(req: Request, res: Response) {
     await Reservation.delete(getId);
 
     return res.json({
-      message: 'Tarefa deletada com sucesso',
+      message: 'Reserva deletada com sucesso',
     });
   } catch (err) {
 

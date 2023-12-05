@@ -1,6 +1,13 @@
 <h1 align="center" id="app-tarefas">
-   App de Reservas RESERV Back End
+   App de Sistema de Reservas Online com Recomendação de Horários RESERV Back End
 </h1>
+
+<h2 align="left" id="app-tarefas">
+  Descrição:
+</h2>
+<p>
+Desenvolver um sistema de reservas online para um restaurante que não apenas permita aos usuários reservar uma mesa, mas também recomende horários alternativos se o horário desejado estiver indisponível. O sistema deve ser otimizado para garantir que o restaurante maximize a ocupação durante os horários de pico, sugerindo aos clientes os melhores horários alternativos.
+</p>
 
 <h2 id="tabela-de-conteudo">Tabela de conteúdos</h2>
 <!--ts-->

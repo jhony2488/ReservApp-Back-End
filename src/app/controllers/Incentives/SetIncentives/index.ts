@@ -5,10 +5,10 @@ import { PropsIncentives } from '../../../interfaces/incentives';
 async function SetIncentives(req: Request, res: Response) {
   const { title, description, type }: PropsIncentives = req.body;
 
-  const User = new IncentivesRepository();
+  const Incentive = new IncentivesRepository();
 
   try {
-    await User.save({ title, description, type });
+    await Incentive.save({ title, description, type });
 
     return res.json({
       message: `Incentivo do tipo ${type} criado com sucesso`,

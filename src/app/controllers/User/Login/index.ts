@@ -26,7 +26,7 @@ async function Login(req: Request, res: Response) {
     });
 
     if(!resultGet || resultGet==null){
-      return res.json({
+      return res.status(400).json({
         message: 'Email ou senha incorretos',
       });
     }
@@ -53,12 +53,12 @@ async function Login(req: Request, res: Response) {
           email,
         });
       }
-      return res.json({
+      return res.status(400).json({
         message: 'Email ou senha incorretos',
       });
     });
   } catch (err) {
-    return res.status(400).json({ message: err.message });
+    return res.status(err.status).json({ message: err.message });
   }
 }
 

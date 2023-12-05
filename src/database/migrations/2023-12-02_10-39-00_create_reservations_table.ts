@@ -9,7 +9,9 @@ export class reservations1693428187268 implements MigrationInterface {
         date VARCHAR(255),
         hour VARCHAR(255),
         password VARCHAR(255),
-        rule VARCHAR(255),
+        number_peoples VARCHAR(255),
+        name_contact VARCHAR(255),
+        contact VARCHAR(255),
         active BOOLEAN,
         created_at TIMESTAMP,
         updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP

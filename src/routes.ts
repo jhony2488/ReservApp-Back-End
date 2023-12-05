@@ -36,11 +36,11 @@ router.get('/', authentication, DefaultControllersUsers);
 //reservations
 router.get('/reservations', adminAuth, GetReservations);
 router.post('/reservations', authentication, SetReservations);
-router.put('/reservations/:id', authentication, UpdateReservations);
-router.delete('/reservations/:id', authentication, DeleteReservations);
+router.put('/reservations/:id', adminAuth, UpdateReservations);
+router.delete('/reservations/:id', adminAuth, DeleteReservations);
 
 //reservation verify hours
-router.post('/reservation-verify', authentication, ReservationVerify);
+router.post('/reservation-verify', adminAuth, ReservationVerify);
 
 //user
 router.get('/users', authentication, GetUsers);
@@ -48,13 +48,13 @@ router.post('/user/login', authentication, Login);
 router.post('/users', authentication, SetUser);
 router.put('/users/:id', authentication, UpdateUser);
 router.patch('/users/:id', authentication, UpdateRuleUser);
-router.delete('/users/:id', authentication, DeleteUser);
+router.delete('/users/:id', adminAuth, DeleteUser);
 
 //Incentives
 router.get('/incentives', authentication, GetIncentives);
-router.post('/incentives', authentication, SetIncentives);
-router.put('/incentives/:id', authentication, UpdateIncentives);
-router.delete('/incentives/:id', authentication, DeleteIncentive);
+router.post('/incentives', adminAuth, SetIncentives);
+router.put('/incentives/:id', adminAuth, UpdateIncentives);
+router.delete('/incentives/:id', adminAuth, DeleteIncentive);
 
 
 export default router;

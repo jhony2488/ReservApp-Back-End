@@ -8,14 +8,15 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: jh556
+      POSTGRES_USER: root
+      POSTGRES_DB: appReservation
       TZ: America/Sao_Paulo
 
   app:
     container_name: 'reserv-back-end'
-    build: .
+    build:
+        dockerfile: Dockerfile
     command: npm run dev
     ports:
       - '80:80'

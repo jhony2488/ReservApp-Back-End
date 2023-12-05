@@ -24,7 +24,7 @@ async function UpdateReservations(req: Request, res: Response) {
 
           await useOccupationHistory({ contact, name_contact }).then(async (itemsReservations) => {
             if (itemsReservations.length > 0) {
-              return res.json({
+              return res.status(400).json({
                 message: 'Reserva já existente',
                 sugestions: itemsReservations,
                 incentives,
@@ -33,7 +33,7 @@ async function UpdateReservations(req: Request, res: Response) {
 
             if (priority === 'entre horarios') {
               const useGap = await useGapFilling(date, hour);
-              return res.json({
+              return res.status(400).json({
                 message: 'Reserva já existente',
                 sugestions: useGap,
                 incentives,
