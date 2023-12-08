@@ -21,7 +21,6 @@ async function UpdateReservations(req: Request, res: Response) {
     await Reservation.findByQuery({ date, hour, name_contact, number_peoples, contact }).then(
       async (reservationsItems) => {
         if (reservationsItems?.length > 0) {
-
           await useOccupationHistory({ contact, name_contact }).then(async (itemsReservations) => {
             if (itemsReservations?.length > 0) {
               return res.status(400).json({
@@ -51,21 +50,27 @@ async function UpdateReservations(req: Request, res: Response) {
         }
       },
     );
-
+    console.log({
+      date,
+      hour,
+      name_contact,
+      number_peoples,
+      contact,
+      active,
+    });
     await Reservation.update(getId, {
       date,
       hour,
       name_contact,
       number_peoples,
       contact,
-      active
+      active,
     });
 
     return res.json({
       message: 'Reserva atualizada com sucesso',
     });
   } catch (err) {
-
     return res.status(400).json({ message: err.message });
   }
 }
