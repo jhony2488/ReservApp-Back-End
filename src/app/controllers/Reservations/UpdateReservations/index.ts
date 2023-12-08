@@ -50,14 +50,7 @@ async function UpdateReservations(req: Request, res: Response) {
         }
       },
     );
-    console.log({
-      date,
-      hour,
-      name_contact,
-      number_peoples,
-      contact,
-      active,
-    });
+
     await Reservation.update(getId, {
       date,
       hour,
